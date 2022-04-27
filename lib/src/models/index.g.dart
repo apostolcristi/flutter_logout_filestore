@@ -10,14 +10,10 @@ _$AppUser$ _$$AppUser$FromJson(Map<String, dynamic> json) => _$AppUser$(
       email: json['email'] as String,
       uid: json['uid'] as String,
       username: json['username'] as String,
-      favoriteMovies: (json['favoriteMovies'] as List<dynamic>?)
-              ?.map((e) => e as int)
-              .toList() ??
-          const <int>[],
+      favoriteMovies: (json['favoriteMovies'] as List<dynamic>?)?.map((e) => e as int).toList() ?? const <int>[],
     );
 
-Map<String, dynamic> _$$AppUser$ToJson(_$AppUser$ instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$$AppUser$ToJson(_$AppUser$ instance) => <String, dynamic>{
       'email': instance.email,
       'uid': instance.uid,
       'username': instance.username,
@@ -29,8 +25,7 @@ _$Movie$ _$$Movie$FromJson(Map<String, dynamic> json) => _$Movie$(
       title: json['title'] as String,
       year: json['year'] as int,
       rating: (json['rating'] as num).toDouble(),
-      genres:
-          (json['genres'] as List<dynamic>).map((e) => e as String).toList(),
+      genres: (json['genres'] as List<dynamic>).map((e) => e as String).toList(),
       poster: json['medium_cover_image'] as String,
     );
 

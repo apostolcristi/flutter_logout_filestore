@@ -3,8 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_logout_filestore/src/data/auth_base_api.dart';
 import 'package:flutter_logout_filestore/src/models/index.dart';
 
-const String _kFavoriteMovieKey = 'user_favorite_movie';
-
 class AuthApi implements AuthApiBase {
   AuthApi(this._auth, this._firestore);
 
@@ -14,12 +12,12 @@ class AuthApi implements AuthApiBase {
   Future<AppUser?> getCurrentUser() async {
     final User? currentUser = _auth.currentUser;
     if (currentUser != null) {
-      final DocumentSnapshot<Map<String, dynamic>> snapshot = await _firestore.doc('users/${currentUser!.uid}').get();
+      final DocumentSnapshot<Map<String, dynamic>> snapshot = await _firestore.doc('users/${currentUser.uid}').get();
 
       if (snapshot.exists) {
         return AppUser.fromJson(snapshot.data()!);
       }
-      final user = AppUser(email: currentUser.email!, uid: currentUser.uid, username: currentUser.displayName!);
+      final AppUser user = AppUser(email: currentUser.email!, uid: currentUser.uid, username: currentUser.displayName!);
 
       await _firestore.doc('users/${user.uid}').set(user.toJson());
 
@@ -44,7 +42,7 @@ class AuthApi implements AuthApiBase {
     final UserCredential credentials = await _auth.createUserWithEmailAndPassword(email: email, password: password);
     await _auth.currentUser!.updateDisplayName(username);
 
-    final user = AppUser(email: email, uid: credentials.user!.uid, username: username);
+    final AppUser user = AppUser(email: email, uid: credentials.user!.uid, username: username);
 
     await _firestore.doc('users/${user.uid}').set(user.toJson());
 
@@ -69,6 +67,6 @@ class AuthApi implements AuthApiBase {
     //     ids = <int>[];
     //   }
     //   return ids;
-    return [];
+    return <int>[];
   }
 }

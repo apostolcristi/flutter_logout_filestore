@@ -11,6 +11,7 @@ class Login with _$Login implements AppAction {
     required ActionResult onResult,
     @Default(_kLoginPendingId) String pendingId,
   }) = LoginStart;
+
   @Implements<UserAction>()
   @Implements<ActionDone>()
   const factory Login.successful(

@@ -32,5 +32,6 @@ class GetMovies with _$GetMovies implements AppAction {
   ) = GetMoviesError;
 
   static String get pendingKey => _kGetMoviesPendingId;
+
   static String get pendingKeyMore => _kGetMoviesMorePendingId;
 }
